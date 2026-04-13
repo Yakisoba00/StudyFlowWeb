@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>StudyFlow — Твой учебный хаб</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-content">
+                <a href="/" class="logo-link">
+                    <div class="logo">
+                        <img src="../img/LogoPNG.png" alt="Logo" class="nav-logo">
+                        <span>StudyFlow</span>
+                    </div>
+                </a>
+                <div class="header-right">
+                    <div class="notification-bell">🛎️</div>
+                    <div class="user-info">
+                        <span id="username-display"></span>
+                        <button class="logout-btn" title="Выйти" onclick="window.logout()">🚪</button>
+                    </div>
+                    <div class="avatar" onclick="window.location.href='profile/profile.html'">
+                        <img src="https://i.pravatar.cc/48?u=student" alt="avatar" id="header-avatar-img">
+                    </div>
+                </div>
+            </div>
+            <div class="greeting">
+                <h1>Привет, <span id="user-name">Студент</span> 👋</h1>
+                <p id="today-text"></p>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <nav class="side-nav">
+                <button class="nav-btn active" data-tab="schedule-view">
+                    <span class="nav-icon">🗓️</span>
+                    <span class="nav-text">Расписание</span>
+                </button>
+                <button class="nav-btn" data-tab="calendar-view">
+                    <span class="nav-icon">📆</span>
+                    <span class="nav-text">Календарь</span>
+                </button>
+                <button class="nav-btn" data-tab="deadlines-view">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Дедлайны</span>
+                </button>
+            </nav>
+
+            <div class="content-area">
+                <div id="schedule-view" class="tab-view active">
+                    <div class="view-header">
+                        <h2 id="schedule-title">📅 Расписание занятий</h2>
+                    </div>
+
+                    <div class="week-navigation">
+                        <div class="week-controls">
+                            <button class="week-btn" id="prev-week">‹</button>
+                            <span class="week-info" id="week-info">Загрузка недели...</span>
+                            <button class="week-btn" id="next-week">›</button>
+                        </div>
+
+                        <div id="week-tabs" class="week-tabs"></div>
+
+                        <div class="schedule-status-container">
+                            <div class="sync-wrapper">
+                                <button id="sync-schedule-btn" class="sync-action-btn">
+                                    <span id="sync-btn-text">Обновить</span>
+                                </button>
+
+                                <span id="update-status" class="update-info-text">Обновлено: 03.04.2026, 03:50</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="schedule-list" class="schedule-items"></div>
+                </div>
+
+                <div id="calendar-view" class="tab-view">
+                    <div class="view-header">
+                        <h2>📆 Календарь задач</h2>
+                    </div>
+                    <div class="month-header">
+                        <button class="week-btn" id="prev-month">‹</button>
+                        <span id="month-title" class="month-title">Март 2026</span>
+                        <button class="week-btn" id="next-month">›</button>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div>Пн</div><div>Вт</div><div>Ср</div><div>Чт</div><div>Пт</div><div>Сб</div><div>Вс</div>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+
+                <div id="deadlines-view" class="tab-view">
+                    <div class="deadlines-header">
+                        <h2>✅ Мои дедлайны</h2>
+                        <button class="add-deadline-btn" id="add-deadline-btn">
+                            <span>+</span> Добавить дедлайн
+                        </button>
+                    </div>
+                    <div id="deadlines-list" class="deadlines-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="day-modal" class="day-modal">
+        <div class="day-modal-content">
+            <h3 id="modal-date"></h3>
+            <div id="modal-events"></div>
+            <button onclick="window.closeDayModal()" class="modal-close-btn">Закрыть</button>
+        </div>
+    </div>
+
+    <div id="deadline-modal" class="deadline-modal">
+        <div class="deadline-modal-content">
+            <h3 id="deadline-modal-title">➕ Добавить дедлайн</h3>
+            <div class="form-group">
+                <label>Предмет</label>
+                <select id="deadline-subject"></select>
+            </div>
+            <div class="form-group">
+                <label>Название работы</label>
+                <input type="text" id="deadline-title" placeholder="Например: Лабораторная №1">
+            </div>
+            <div class="form-group">
+                <label>Описание (необязательно)</label>
+                <textarea id="deadline-description" placeholder="Требования или заметки..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Дата сдачи</label>
+                <input type="date" id="deadline-date">
+            </div>
+            <div class="form-group">
+                <label>Время</label>
+                <input type="time" id="deadline-time" value="23:59">
+            </div>
+            <div class="modal-buttons">
+                <button class="save-btn" onclick="window.saveDeadline()">Сохранить</button>
+                <button class="cancel-btn" onclick="window.closeDeadlineModal()">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

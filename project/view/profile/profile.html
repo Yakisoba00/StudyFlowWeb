@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>StudyFlow</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-content">
+                <a href="/" class="logo-link">
+                    <div class="logo">
+                        <img src="../img/LogoPNG.png" alt="Logo" class="nav-logo">
+                        <span>StudyFlow</span>
+                    </div>
+                </a>
+                <div class="header-right">
+                    <div class="notification-bell">🛎️</div>
+                    <button class="back-to-main-btn" onclick="window.location.href='../mobile.html'">← На главную</button>
+                </div>
+            </div>
+            <div class="greeting">
+                <h1>Мой профиль 👤</h1>
+                <p id="profile-status"></p>
+            </div>
+        </header>
+
+        <div class="profile-container">
+            <!-- Левая колонка - информация о пользователе -->
+            <div class="profile-sidebar">
+                <div class="profile-avatar-large">
+                    <img src="https://i.pravatar.cc/150?u=student" alt="avatar" id="profile-avatar">
+                    <button class="change-avatar-btn" onclick="changeAvatar()">📷 Сменить аватар</button>
+                </div>
+                <div class="profile-info">
+                    <h2 id="profile-name">Артём</h2>
+                    <p class="profile-username" id="profile-username">@artem</p>
+                    <p class="profile-email" id="profile-email">artem@example.com</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-value" id="friends-count">0</span>
+                            <span class="stat-label">Друзей</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="deadlines-completed">0</span>
+                            <span class="stat-label">Выполнено</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="active-deadlines">0</span>
+                            <span class="stat-label">Активных</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правая колонка - настройки -->
+            <div class="profile-content">
+                <!-- Выбор группы -->
+                <div class="profile-section">
+                    <h3>📚 Моя группа</h3>
+                    <div class="group-selector">
+                        <select id="group-select" class="group-select">
+                            <option value="">Выберите группу</option>
+                            
+                            <optgroup label="🏛️ Институт архитектуры и дизайна">
+                                <option value="СПД-11">СПД-11</option>
+                                <option value="САР-14">САР-14</option>
+                                <option value="САР-14м">САР-14м</option>
+                                <option value="САРД-15">САРД-15</option>
+                                <option value="СПД-21">СПД-21</option>
+                                <option value="САР-24">САР-24</option>
+                                <option value="САРД-25">САРД-25</option>
+                                <option value="САР-34">САР-34</option>
+                                <option value="САРД-35">САРД-35</option>
+                                <option value="САР-44">САР-44</option>
+                                <option value="САРД-45">САРД-45</option>
+                                <option value="САР-54">САР-54</option>
+                                <option value="САРД-55">САРД-55</option>
+                            </optgroup>
+                            
+                            <optgroup label="🚗 Институт инженеров строительства и транспорта">
+                                <option value="ТСД-11">ТСД-11</option>
+                                <option value="ПГС-11м">ПГС-11м</option>
+                                <option value="ТСД-12">ТСД-12</option>
+                                <option value="АСД-12м">АСД-12м</option>
+                                <option value="ТСД-13">ТСД-13</option>
+                                <option value="ТСД-14">ТСД-14</option>
+                                <option value="ТИГ-15">ТИГ-15</option>
+                                <option value="ТПГС-21">ТПГС-21</option>
+                                <option value="ТПГС-22">ТПГС-22</option>
+                                <option value="ТАД-23">ТАД-23</option>
+                                <option value="ТИГ-24">ТИГ-24</option>
+                                <option value="ТПГС-31">ТПГС-31</option>
+                                <option value="ТПГС-32">ТПГС-32</option>
+                                <option value="ТАД-33">ТАД-33</option>
+                                <option value="ПГС-41">ПГС-41</option>
+                                <option value="ПГС-42">ПГС-42</option>
+                                <option value="АТ-43">АТ-43</option>
+                                <option value="ИЗТ-46">ИЗТ-46</option>
+                                <option value="АСД-47">АСД-47</option>
+                            </optgroup>
+                            
+                            <optgroup label="🧪 Институт химии и химической технологии">
+                                <option value="ХТ-11">ХТ-11</option>
+                                <option value="ХТОМ-11м">ХТОМ-11м</option>
+                                <option value="ХТ-13">ХТ-13</option>
+                                <option value="ХТБТ-13">ХТБТ-13</option>
+                                <option value="ХТБМ-13м">ХТБМ-13м</option>
+                                <option value="ХТ-14">ХТ-14</option>
+                                <option value="ХТПМ-17м">ХТПМ-17м</option>
+                                <option value="ХТХ-19">ХТХ-19</option>
+                                <option value="ХТХМ-19м">ХТХМ-19м</option>
+                                <option value="ХТ-21">ХТ-21</option>
+                                <option value="ХТ-22">ХТ-22</option>
+                                <option value="ХТ-23">ХТ-23</option>
+                                <option value="ХТБТ-23">ХТБТ-23</option>
+                                <option value="ХТ-24">ХТ-24</option>
+                                <option value="ХТХ-29">ХТХ-29</option>
+                                <option value="ХТУМ-30">ХТУМ-30</option>
+                                <option value="ХТОС-32">ХТОС-32</option>
+                                <option value="ХТБ-33">ХТБ-33</option>
+                                <option value="ХТБТ-33">ХТБТ-33</option>
+                                <option value="ХТЛ-34">ХТЛ-34</option>
+                                <option value="ХТП-35">ХТП-35</option>
+                                <option value="ХТХ-39">ХТХ-39</option>
+                                <option value="ХТХБ-39">ХТХБ-39</option>
+                                <option value="ХТУМ-40">ХТУМ-40</option>
+                                <option value="ХТО-41">ХТО-41</option>
+                                <option value="ХТОС-42">ХТОС-42</option>
+                                <option value="ХТБ-43">ХТБ-43</option>
+                                <option value="ХТЛ-44">ХТЛ-44</option>
+                                <option value="ХТП-45">ХТП-45</option>
+                                <option value="ХТХБ-49">ХТХБ-49</option>
+                                <option value="ХТХ-49 (б)">ХТХ-49 (б)</option>
+                                <option value="ХТХ-49 (н)">ХТХ-49 (н)</option>
+                                <option value="ХТХ-49 (ф)">ХТХ-49 (ф)</option>
+                            </optgroup>
+                            
+                            <optgroup label="💰 Институт экономики и менеджмента">
+                                <option value="ЭМ-10">ЭМ-10</option>
+                                <option value="ЭМ-10а">ЭМ-10а</option>
+                                <option value="ЭМУР-10м">ЭМУР-10м</option>
+                                <option value="ЭМО-11">ЭМО-11</option>
+                                <option value="ЭМО-11а">ЭМО-11а</option>
+                                <option value="ЭМО-11м">ЭМО-11м</option>
+                                <option value="ЭЭ-12">ЭЭ-12</option>
+                                <option value="ЭЭ-12а">ЭЭ-12а</option>
+                                <option value="ЭУК-13">ЭУК-13</option>
+                                <option value="ЭМ-20">ЭМ-20</option>
+                                <option value="ЭМО-21">ЭМО-21</option>
+                                <option value="ЭМО-21а">ЭМО-21а</option>
+                                <option value="ЭЭ-22">ЭЭ-22</option>
+                                <option value="ЭУК-23">ЭУК-23</option>
+                                <option value="ЭМ-30 (л)">ЭМ-30 (л)</option>
+                                <option value="ЭМ-30 (п)">ЭМ-30 (п)</option>
+                                <option value="ЭМО-31">ЭМО-31</option>
+                                <option value="ЭМО-31а">ЭМО-31а</option>
+                                <option value="ЭЭ-32">ЭЭ-32</option>
+                                <option value="ЭУК-33">ЭУК-33</option>
+                                <option value="ЭМ-40 (л)">ЭМ-40 (л)</option>
+                                <option value="ЭМ-40 (п)">ЭМ-40 (п)</option>
+                                <option value="ЭМО-41">ЭМО-41</option>
+                                <option value="ЭМО-41а">ЭМО-41а</option>
+                                <option value="ЭЭ-42">ЭЭ-42</option>
+                                <option value="ЭУК-43">ЭУК-43</option>
+                            </optgroup>
+                            
+                            <optgroup label="💻 Институт цифровых систем">
+                                <option value="ЦПС-10">ЦПС-10</option>
+                                <option value="ЦМИИ-10м">ЦМИИ-10м</option>
+                                <option value="ЦПИ-11">ЦПИ-11</option>
+                                <option value="ЦПИ-11а">ЦПИ-11а</option>
+                                <option value="ЦПИ-11б">ЦПИ-11б</option>
+                                <option value="ЦТС-12">ЦТС-12</option>
+                                <option value="ЦИС-13">ЦИС-13</option>
+                                <option value="ЦИС-14">ЦИС-14</option>
+                                <option value="ЦМИС-14м">ЦМИС-14м</option>
+                                <option value="ЦИС-15">ЦИС-15</option>
+                                <option value="ЦИС-16">ЦИС-16</option>
+                                <option value="ЦИС-17">ЦИС-17</option>
+                                <option value="ОЗЦИБ-18">ОЗЦИБ-18</option>
+                                <option value="ЦИС-18">ЦИС-18</option>
+                                <option value="ЦИС-19">ЦИС-19</option>
+                                <option value="ЦПС-20">ЦПС-20</option>
+                                <option value="ЦМИИ-20м">ЦМИИ-20м</option>
+                                <option value="ЦПИ-21">ЦПИ-21</option>
+                                <option value="ЦПИ-21а">ЦПИ-21а</option>
+                                <option value="ЦПИ-21б">ЦПИ-21б</option>
+                                <option value="ЦТС-22">ЦТС-22</option>
+                                <option value="ЦИС-23">ЦИС-23</option>
+                                <option value="ЦИСБ-24">ЦИСБ-24</option>
+                                <option value="ЦМИС-24м">ЦМИС-24м</option>
+                                <option value="ЦСИИ-25">ЦСИИ-25</option>
+                                <option value="ЦМУД-25м">ЦМУД-25м</option>
+                                <option value="ЦИС-26">ЦИС-26</option>
+                                <option value="ЦИС-27">ЦИС-27</option>
+                                <option value="ЦИС-28">ЦИС-28</option>
+                                <option value="ЦИС-29">ЦИС-29</option>
+                                <option value="ЦПС-30">ЦПС-30</option>
+                                <option value="ЦПИ-31">ЦПИ-31</option>
+                                <option value="ЦПИ-31а">ЦПИ-31а</option>
+                                <option value="ЦТС-32">ЦТС-32</option>
+                                <option value="ЦИС-33">ЦИС-33</option>
+                                <option value="ЦИСБ-34">ЦИСБ-34</option>
+                                <option value="ЦСИИ-35">ЦСИИ-35</option>
+                                <option value="ЦИС-36">ЦИС-36</option>
+                                <option value="ЦИС-37">ЦИС-37</option>
+                                <option value="ЦИС-38">ЦИС-38</option>
+                                <option value="ЦПС-40">ЦПС-40</option>
+                                <option value="ЦПС-40а">ЦПС-40а</option>
+                                <option value="ЦПИ-41">ЦПИ-41</option>
+                                <option value="ЦИС-43">ЦИС-43</option>
+                                <option value="ЦИСБ-44">ЦИСБ-44</option>
+                                <option value="ЦСИИ-45">ЦСИИ-45</option>
+                                <option value="ЦИС-46">ЦИС-46</option>
+                                <option value="ЦИС-47">ЦИС-47</option>
+                                <option value="ЦИС-48">ЦИС-48</option>
+                            </optgroup>
+                            
+                            <optgroup label="🔧 Институт инженерии и машиностроения">
+                                <option value="МВ-10">МВ-10</option>
+                                <option value="ММ-11">ММ-11</option>
+                                <option value="МТМО-11м">МТМО-11м</option>
+                                <option value="МСМ-12">МСМ-12</option>
+                                <option value="ММТП-12м">ММТП-12м</option>
+                                <option value="МД-13">МД-13</option>
+                                <option value="МЭМН-13м">МЭМН-13м</option>
+                                <option value="МКС-14">МКС-14</option>
+                                <option value="МТ-15">МТ-15</option>
+                                <option value="МКТО-15м">МКТО-15м</option>
+                                <option value="МСДМ-17">МСДМ-17</option>
+                                <option value="МВ-20">МВ-20</option>
+                                <option value="ММ-21">ММ-21</option>
+                                <option value="МСМ-22">МСМ-22</option>
+                                <option value="МД-23">МД-23</option>
+                                <option value="МЭМН-23м">МЭМН-23м</option>
+                                <option value="МКС-24">МКС-24</option>
+                                <option value="МТ-25">МТ-25</option>
+                                <option value="МКТО-25м">МКТО-25м</option>
+                                <option value="МСДМ-26">МСДМ-26</option>
+                                <option value="МСДМ-27">МСДМ-27</option>
+                                <option value="МВ-30">МВ-30</option>
+                                <option value="ММ-31">ММ-31</option>
+                                <option value="МСМ-32">МСМ-32</option>
+                                <option value="МЗ-34">МЗ-34</option>
+                                <option value="МТ-35">МТ-35</option>
+                                <option value="МСДМ-36">МСДМ-36</option>
+                                <option value="МСДМ-37">МСДМ-37</option>
+                                <option value="МВ-40">МВ-40</option>
+                                <option value="ММ-41">ММ-41</option>
+                                <option value="ЭСМ-42">ЭСМ-42</option>
+                                <option value="АД-43">АД-43</option>
+                                <option value="МТ-45">МТ-45</option>
+                                <option value="АСДМ-47">АСДМ-47</option>
+                                <option value="АСДМ-48">АСДМ-48</option>
+                            </optgroup>
+                            
+                            <optgroup label="🎓 Колледж">
+                                <option value="АК-251">АК-251</option>
+                                <option value="МК-252">МК-252</option>
+                                <option value="БК-253">БК-253</option>
+                                <option value="УК-254">УК-254</option>
+                                <option value="СК-255">СК-255</option>
+                                <option value="ЛК-257">ЛК-257</option>
+                                <option value="ИК-259">ИК-259</option>
+                            </optgroup>
+                        </select>
+                        <button class="save-group-btn" onclick="saveGroup()">Сохранить</button>
+                    </div>
+                    <p class="group-info" id="group-info">Текущая группа: не выбрана</p>
+                </div>
+                <!-- Друзья -->
+                <div class="profile-section">
+                    <h3>👥 Друзья</h3>
+                    <div class="friends-header">
+                        <input type="text" id="friend-search" placeholder="Поиск по username..." class="friend-search" onkeyup="searchFriends()">
+                        <button class="add-friend-btn" onclick="openAddFriendModal()">+ Добавить друга</button>
+                    </div>
+                    <div id="friends-list" class="friends-list">
+                        <!-- Список друзей будет загружен сюда -->
+                    </div>
+                </div>
+
+                <!-- Дополнительные настройки -->
+                <div class="profile-section">
+                    <h3>⚙️ Настройки</h3>
+                    <div class="settings-item">
+                        <label class="switch">
+                            <input type="checkbox" id="notifications-toggle" onchange="toggleNotifications()">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Уведомления о дедлайнах</span>
+                    </div>
+                    <div class="settings-item">
+                        <label class="switch">
+                            <input type="checkbox" id="dark-theme-toggle" onchange="toggleTheme()">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Темная тема</span>
+                    </div>
+                </div>
+
+                <!-- Кнопка выхода -->
+                <div class="profile-section">
+                    <button class="logout-btn-full" onclick="logout()">🚪 Выйти из аккаунта</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для добавления друга -->
+    <div id="add-friend-modal" class="modal">
+        <div class="modal-content">
+            <h3>➕ Добавить друга</h3>
+            <div class="form-group">
+                <label>Username друга</label>
+                <input type="text" id="friend-username" placeholder="Введите username">
+            </div>
+            <div class="modal-buttons">
+                <button class="save-btn" onclick="addFriend()">Добавить</button>
+                <button class="cancel-btn" onclick="closeAddFriendModal()">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для смены аватара -->
+    <div id="avatar-modal" class="modal">
+        <div class="modal-content">
+            <h3>📷 Сменить аватар</h3>
+            <div class="avatar-options">
+                <div class="avatar-option" onclick="setAvatar('https://i.pravatar.cc/150?img=1')">
+                    <img src="https://i.pravatar.cc/150?img=1" alt="avatar1">
+                </div>
+                <div class="avatar-option" onclick="setAvatar('https://i.pravatar.cc/150?img=2')">
+                    <img src="https://i.pravatar.cc/150?img=2" alt="avatar2">
+                </div>
+                <div class="avatar-option" onclick="setAvatar('https://i.pravatar.cc/150?img=3')">
+                    <img src="https://i.pravatar.cc/150?img=3" alt="avatar3">
+                </div>
+                <div class="avatar-option" onclick="setAvatar('https://i.pravatar.cc/150?img=4')">
+                    <img src="https://i.pravatar.cc/150?img=4" alt="avatar4">
+                </div>
+                <div class="avatar-option" onclick="setAvatar('https://i.pravatar.cc/150?img=5')">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="avatar5">
+                </div>
+                <div class="avatar-option" onclick="setAvatar('https://i.pravatar.cc/150?img=6')">
+                    <img src="https://i.pravatar.cc/150?img=6" alt="avatar6">
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="cancel-btn" onclick="closeAvatarModal()">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../auth/auth.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

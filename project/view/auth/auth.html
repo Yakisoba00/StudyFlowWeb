@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyFlow — Авторизация</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div href="/" class="logo-link">
+                <div class="auth-logo">
+                    <img src="../img/LogoPNG.png" alt="Logo" class="nav-logo">
+                    <span>StudyFlow</span>
+                </div>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login" onclick="switchTab('login')">Вход</button>
+                <button class="auth-tab" data-tab="register" onclick="switchTab('register')">Регистрация</button>
+            </div>
+
+            <div id="login-form" class="auth-form active">
+                <div class="form-group">
+                    <label>Email или username</label>
+                    <input type="text" id="login-username" placeholder="Введите email или username">
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" id="login-password" placeholder="Введите пароль">
+                </div>
+                <button class="auth-btn" id="login-btn">Войти</button>
+                <div class="auth-footer">
+                    <a href="#" onclick="switchTab('register')">Нет аккаунта? Зарегистрируйтесь</a>
+                </div>
+            </div>
+
+            <div id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label>Имя пользователя</label>
+                    <input type="text" id="reg-username" placeholder="Придумайте username">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="reg-email" placeholder="Введите email">
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" id="reg-password" placeholder="Придумайте пароль">
+                </div>
+                <div class="form-group">
+                    <label>Подтверждение пароля</label>
+                    <input type="password" id="reg-confirm" placeholder="Повторите пароль">
+                </div>
+                <button class="auth-btn" id="register-btn">Зарегистрироваться</button>
+                <div class="auth-footer">
+                    <a href="#" onclick="switchTab('login')">Уже есть аккаунт? Войдите</a>
+                </div>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+        </div>
+    </div>
+
+    <div id="setup-group-modal" class="auth-modal">
+        <div class="auth-modal-content">
+            <div class="modal-icon">🎓</div>
+            <h3>Почти готово!</h3>
+            <p>Выберите свою учебную группу, чтобы мы могли сразу настроить ваше расписание.</p>
+
+            <div class="form-group">
+                <select id="setup-group-select" class="auth-input styled-select">
+                    <option value="" disabled selected>Выберите группу из списка...</option>
+
+                    <optgroup label="🏛️ Институт архитектуры и дизайна">
+                        <option value="СПД-11">СПД-11</option>
+                        <option value="САР-14">САР-14</option>
+                        <option value="САР-14м">САР-14м</option>
+                        <option value="САРД-15">САРД-15</option>
+                        <option value="СПД-21">СПД-21</option>
+                        <option value="САР-24">САР-24</option>
+                        <option value="САРД-25">САРД-25</option>
+                        <option value="САР-34">САР-34</option>
+                        <option value="САРД-35">САРД-35</option>
+                        <option value="САР-44">САР-44</option>
+                        <option value="САРД-45">САРД-45</option>
+                        <option value="САР-54">САР-54</option>
+                        <option value="САРД-55">САРД-55</option>
+                    </optgroup>
+
+                    <optgroup label="🚗 Институт инженеров строительства и транспорта">
+                        <option value="ТСД-11">ТСД-11</option>
+                        <option value="ПГС-11м">ПГС-11м</option>
+                        <option value="ТСД-12">ТСД-12</option>
+                        <option value="АСД-12м">АСД-12м</option>
+                        <option value="ТСД-13">ТСД-13</option>
+                        <option value="ТСД-14">ТСД-14</option>
+                        <option value="ТИГ-15">ТИГ-15</option>
+                        <option value="ТПГС-21">ТПГС-21</option>
+                        <option value="ТПГС-22">ТПГС-22</option>
+                        <option value="ТАД-23">ТАД-23</option>
+                        <option value="ТИГ-24">ТИГ-24</option>
+                        <option value="ТПГС-31">ТПГС-31</option>
+                        <option value="ТПГС-32">ТПГС-32</option>
+                        <option value="ТАД-33">ТАД-33</option>
+                        <option value="ПГС-41">ПГС-41</option>
+                        <option value="ПГС-42">ПГС-42</option>
+                        <option value="АТ-43">АТ-43</option>
+                        <option value="ИЗТ-46">ИЗТ-46</option>
+                        <option value="АСД-47">АСД-47</option>
+                    </optgroup>
+
+                    <optgroup label="🧪 Институт химии и химической технологии">
+                        <option value="ХТ-11">ХТ-11</option>
+                        <option value="ХТОМ-11м">ХТОМ-11м</option>
+                        <option value="ХТ-13">ХТ-13</option>
+                        <option value="ХТБТ-13">ХТБТ-13</option>
+                        <option value="ХТБМ-13м">ХТБМ-13м</option>
+                        <option value="ХТ-14">ХТ-14</option>
+                        <option value="ХТПМ-17м">ХТПМ-17м</option>
+                        <option value="ХТХ-19">ХТХ-19</option>
+                        <option value="ХТХМ-19м">ХТХМ-19м</option>
+                        <option value="ХТ-21">ХТ-21</option>
+                        <option value="ХТ-22">ХТ-22</option>
+                        <option value="ХТ-23">ХТ-23</option>
+                        <option value="ХТБТ-23">ХТБТ-23</option>
+                        <option value="ХТ-24">ХТ-24</option>
+                        <option value="ХТХ-29">ХТХ-29</option>
+                        <option value="ХТУМ-30">ХТУМ-30</option>
+                        <option value="ХТОС-32">ХТОС-32</option>
+                        <option value="ХТБ-33">ХТБ-33</option>
+                        <option value="ХТБТ-33">ХТБТ-33</option>
+                        <option value="ХТЛ-34">ХТЛ-34</option>
+                        <option value="ХТП-35">ХТП-35</option>
+                        <option value="ХТХ-39">ХТХ-39</option>
+                        <option value="ХТХБ-39">ХТХБ-39</option>
+                        <option value="ХТУМ-40">ХТУМ-40</option>
+                        <option value="ХТО-41">ХТО-41</option>
+                        <option value="ХТОС-42">ХТОС-42</option>
+                        <option value="ХТБ-43">ХТБ-43</option>
+                        <option value="ХТЛ-44">ХТЛ-44</option>
+                        <option value="ХТП-45">ХТП-45</option>
+                        <option value="ХТХБ-49">ХТХБ-49</option>
+                        <option value="ХТХ-49 (б)">ХТХ-49 (б)</option>
+                        <option value="ХТХ-49 (н)">ХТХ-49 (н)</option>
+                        <option value="ХТХ-49 (ф)">ХТХ-49 (ф)</option>
+                    </optgroup>
+
+                    <optgroup label="💰 Институт экономики и менеджмента">
+                        <option value="ЭМ-10">ЭМ-10</option>
+                        <option value="ЭМ-10а">ЭМ-10а</option>
+                        <option value="ЭМУР-10м">ЭМУР-10м</option>
+                        <option value="ЭМО-11">ЭМО-11</option>
+                        <option value="ЭМО-11а">ЭМО-11а</option>
+                        <option value="ЭМО-11м">ЭМО-11м</option>
+                        <option value="ЭЭ-12">ЭЭ-12</option>
+                        <option value="ЭЭ-12а">ЭЭ-12а</option>
+                        <option value="ЭУК-13">ЭУК-13</option>
+                        <option value="ЭМ-20">ЭМ-20</option>
+                        <option value="ЭМО-21">ЭМО-21</option>
+                        <option value="ЭМО-21а">ЭМО-21а</option>
+                        <option value="ЭЭ-22">ЭЭ-22</option>
+                        <option value="ЭУК-23">ЭУК-23</option>
+                        <option value="ЭМ-30 (л)">ЭМ-30 (л)</option>
+                        <option value="ЭМ-30 (п)">ЭМ-30 (п)</option>
+                        <option value="ЭМО-31">ЭМО-31</option>
+                        <option value="ЭМО-31а">ЭМО-31а</option>
+                        <option value="ЭЭ-32">ЭЭ-32</option>
+                        <option value="ЭУК-33">ЭУК-33</option>
+                        <option value="ЭМ-40 (л)">ЭМ-40 (л)</option>
+                        <option value="ЭМ-40 (п)">ЭМ-40 (п)</option>
+                        <option value="ЭМО-41">ЭМО-41</option>
+                        <option value="ЭМО-41а">ЭМО-41а</option>
+                        <option value="ЭЭ-42">ЭЭ-42</option>
+                        <option value="ЭУК-43">ЭУК-43</option>
+                    </optgroup>
+
+                    <optgroup label="💻 Институт цифровых систем">
+                        <option value="ЦПС-10">ЦПС-10</option>
+                        <option value="ЦМИИ-10м">ЦМИИ-10м</option>
+                        <option value="ЦПИ-11">ЦПИ-11</option>
+                        <option value="ЦПИ-11а">ЦПИ-11а</option>
+                        <option value="ЦПИ-11б">ЦПИ-11б</option>
+                        <option value="ЦТС-12">ЦТС-12</option>
+                        <option value="ЦИС-13">ЦИС-13</option>
+                        <option value="ЦИС-14">ЦИС-14</option>
+                        <option value="ЦМИС-14м">ЦМИС-14м</option>
+                        <option value="ЦИС-15">ЦИС-15</option>
+                        <option value="ЦИС-16">ЦИС-16</option>
+                        <option value="ЦИС-17">ЦИС-17</option>
+                        <option value="ОЗЦИБ-18">ОЗЦИБ-18</option>
+                        <option value="ЦИС-18">ЦИС-18</option>
+                        <option value="ЦИС-19">ЦИС-19</option>
+                        <option value="ЦПС-20">ЦПС-20</option>
+                        <option value="ЦМИИ-20м">ЦМИИ-20м</option>
+                        <option value="ЦПИ-21">ЦПИ-21</option>
+                        <option value="ЦПИ-21а">ЦПИ-21а</option>
+                        <option value="ЦПИ-21б">ЦПИ-21б</option>
+                        <option value="ЦТС-22">ЦТС-22</option>
+                        <option value="ЦИС-23">ЦИС-23</option>
+                        <option value="ЦИСБ-24">ЦИСБ-24</option>
+                        <option value="ЦМИС-24м">ЦМИС-24м</option>
+                        <option value="ЦСИИ-25">ЦСИИ-25</option>
+                        <option value="ЦМУД-25м">ЦМУД-25м</option>
+                        <option value="ЦИС-26">ЦИС-26</option>
+                        <option value="ЦИС-27">ЦИС-27</option>
+                        <option value="ЦИС-28">ЦИС-28</option>
+                        <option value="ЦИС-29">ЦИС-29</option>
+                        <option value="ЦПС-30">ЦПС-30</option>
+                        <option value="ЦПИ-31">ЦПИ-31</option>
+                        <option value="ЦПИ-31а">ЦПИ-31а</option>
+                        <option value="ЦТС-32">ЦТС-32</option>
+                        <option value="ЦИС-33">ЦИС-33</option>
+                        <option value="ЦИСБ-34">ЦИСБ-34</option>
+                        <option value="ЦСИИ-35">ЦСИИ-35</option>
+                        <option value="ЦИС-36">ЦИС-36</option>
+                        <option value="ЦИС-37">ЦИС-37</option>
+                        <option value="ЦИС-38">ЦИС-38</option>
+                        <option value="ЦПС-40">ЦПС-40</option>
+                        <option value="ЦПС-40а">ЦПС-40а</option>
+                        <option value="ЦПИ-41">ЦПИ-41</option>
+                        <option value="ЦИС-43">ЦИС-43</option>
+                        <option value="ЦИСБ-44">ЦИСБ-44</option>
+                        <option value="ЦСИИ-45">ЦСИИ-45</option>
+                        <option value="ЦИС-46">ЦИС-46</option>
+                        <option value="ЦИС-47">ЦИС-47</option>
+                        <option value="ЦИС-48">ЦИС-48</option>
+                    </optgroup>
+
+                    <optgroup label="🔧 Институт инженерии и машиностроения">
+                        <option value="МВ-10">МВ-10</option>
+                        <option value="ММ-11">ММ-11</option>
+                        <option value="МТМО-11м">МТМО-11м</option>
+                        <option value="МСМ-12">МСМ-12</option>
+                        <option value="ММТП-12м">ММТП-12м</option>
+                        <option value="МД-13">МД-13</option>
+                        <option value="МЭМН-13м">МЭМН-13м</option>
+                        <option value="МКС-14">МКС-14</option>
+                        <option value="МТ-15">МТ-15</option>
+                        <option value="МКТО-15м">МКТО-15м</option>
+                        <option value="МСДМ-17">МСДМ-17</option>
+                        <option value="МВ-20">МВ-20</option>
+                        <option value="ММ-21">ММ-21</option>
+                        <option value="МСМ-22">МСМ-22</option>
+                        <option value="МД-23">МД-23</option>
+                        <option value="МЭМН-23м">МЭМН-23м</option>
+                        <option value="МКС-24">МКС-24</option>
+                        <option value="МТ-25">МТ-25</option>
+                        <option value="МКТО-25м">МКТО-25м</option>
+                        <option value="МСДМ-26">МСДМ-26</option>
+                        <option value="МСДМ-27">МСДМ-27</option>
+                        <option value="МВ-30">МВ-30</option>
+                        <option value="ММ-31">ММ-31</option>
+                        <option value="МСМ-32">МСМ-32</option>
+                        <option value="МЗ-34">МЗ-34</option>
+                        <option value="МТ-35">МТ-35</option>
+                        <option value="МСДМ-36">МСДМ-36</option>
+                        <option value="МСДМ-37">МСДМ-37</option>
+                        <option value="МВ-40">МВ-40</option>
+                        <option value="ММ-41">ММ-41</option>
+                        <option value="ЭСМ-42">ЭСМ-42</option>
+                        <option value="АД-43">АД-43</option>
+                        <option value="МТ-45">МТ-45</option>
+                        <option value="АСДМ-47">АСДМ-47</option>
+                        <option value="АСДМ-48">АСДМ-48</option>
+                    </optgroup>
+
+                    <optgroup label="🎓 Колледж">
+                        <option value="АК-251">АК-251</option>
+                        <option value="МК-252">МК-252</option>
+                        <option value="БК-253">БК-253</option>
+                        <option value="УК-254">УК-254</option>
+                        <option value="СК-255">СК-255</option>
+                        <option value="ЛК-257">ЛК-257</option>
+                        <option value="ИК-259">ИК-259</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <button id="finish-setup-btn" class="auth-btn">Начать использование</button>
+            <button id="skip-setup-btn" class="skip-link">Выбрать позже в профиле</button>
+        </div>
+    </div>
+    
+    <script type="module" src="auth.js"></script>
+</body>
+</html>

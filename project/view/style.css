@@ -1,0 +1,1079 @@
+/* Добавляем стили для дней недели */
+.calendar-weekdays div {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.calendar-weekdays div:hover {
+    background: rgba(0, 245, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.calendar-weekdays div.active {
+    background: linear-gradient(135deg, #00f5ff, #00bfff);
+    color: #0a0a0a;
+}
+
+/* Остальные стили остаются без изменений */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #0f0f1a 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.95), rgba(26, 26, 26, 0.95));
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 20px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(0, 245, 255, 0.1);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo span:first-child {
+    font-size: 36px;
+}
+
+.logo span:last-child {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #00f5ff, #00bfff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.notification-bell {
+    font-size: 28px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.notification-bell:hover {
+    transform: scale(1.1);
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #00f5ff;
+    transition: transform 0.2s;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.greeting {
+    margin-top: 16px;
+}
+
+.greeting h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.greeting p {
+    font-size: 16px;
+    color: #aaaaaa;
+}
+
+.main-layout {
+    display: flex;
+    gap: 24px;
+    flex: 1;
+}
+
+.side-nav {
+    width: 280px;
+    background: rgba(31, 31, 31, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 24px 16px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.nav-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    margin-bottom: 12px;
+    background: rgba(31, 31, 31, 0.6);
+    border: none;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #aaaaaa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.nav-btn:hover {
+    background: rgba(0, 245, 255, 0.1);
+    transform: translateX(4px);
+}
+
+.nav-btn.active {
+    background: linear-gradient(135deg, #00f5ff, #00bfff);
+    color: #0a0a0a;
+    box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
+}
+
+.nav-icon {
+    font-size: 24px;
+}
+
+.content-area {
+    flex: 1;
+    min-width: 0;
+}
+
+.tab-view {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-view.active {
+    display: block;
+}
+
+.view-header {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.view-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00f5ff, #00bfff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.week-navigation {
+    background: rgba(31, 31, 31, 0.6);
+    border-radius: 20px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.week-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.week-btn {
+    background: rgba(0, 245, 255, 0.2);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    font-size: 24px;
+    color: #00f5ff;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.week-btn:hover {
+    background: #00f5ff;
+    color: #0a0a0a;
+    transform: scale(1.05);
+}
+
+.week-info {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 20px;
+    background: rgba(0, 245, 255, 0.1);
+    border-radius: 40px;
+    color: #00f5ff;
+}
+
+.week-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.week-tab {
+    padding: 8px 20px;
+    background: rgba(31, 31, 31, 0.6);
+    border: none;
+    border-radius: 40px;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.week-tab:hover {
+    background: rgba(0, 245, 255, 0.2);
+    color: #00f5ff;
+}
+
+.week-tab.active {
+    background: linear-gradient(135deg, #00f5ff, #00bfff);
+    color: #0a0a0a;
+}
+
+.schedule-table {
+    background: rgba(31, 31, 31, 0.6);
+    border-radius: 20px;
+    overflow-x: auto;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 245, 255, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 16px 20px;
+    background: rgba(0, 245, 255, 0.1);
+    font-weight: 600;
+    color: #00f5ff;
+    border-bottom: 2px solid rgba(0, 245, 255, 0.3);
+}
+
+td {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: top;
+}
+
+tr:hover {
+    background: rgba(0, 245, 255, 0.05);
+}
+
+.day-cell {
+    font-weight: 600;
+    width: 120px;
+}
+
+.day-name {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.day-date {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.schedule-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.schedule-item {
+    background: rgba(20, 20, 20, 0.8); /* Твой исходный темный фон */
+    border-radius: 12px; /* Твои скругления */
+    padding: 12px;
+    border-left: 3px solid #00f5ff; /* Цвет по умолчанию (бирюзовый) */
+    transition: transform 0.2s ease;
+}
+
+/* Раскраска в зависимости от типа занятия */
+.schedule-item.lecture {
+    border-left-color: #2ecc71; /* Зеленый для лекций */
+}
+
+.schedule-item.practice {
+    border-left-color: #f1c40f; /* Желтый для практик */
+}
+
+/* Эффект при наведении (по желанию) */
+.schedule-item:hover {
+    background: rgba(30, 30, 30, 0.9);
+}
+
+.item-time {
+    font-size: 13px;
+    color: #00f5ff;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.item-subject {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.item-type {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    background: #00bfff;
+    border-radius: 12px;
+    margin-right: 8px;
+}
+
+.item-room {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 6px;
+}
+
+.empty-day {
+    color: #aaa;
+    font-style: italic;
+    padding: 20px;
+    text-align: center;
+}
+
+.month-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(31, 31, 31, 0.8);
+    padding: 16px 24px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+}
+
+.month-header button {
+    background: rgba(0, 245, 255, 0.2);
+    border: none;
+    font-size: 28px;
+    color: #00f5ff;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.month-header button:hover {
+    background: #00f5ff;
+    color: #0a0a0a;
+    transform: scale(1.05);
+}
+
+#month-title {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 14px;
+    color: #aaaaaa;
+    margin-bottom: 12px;
+    font-weight: 600;
+    padding: 0 8px;
+}
+
+.calendar-weekdays div {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.calendar-weekdays div:hover {
+    background: rgba(0, 245, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.calendar-weekdays div.active {
+    background: linear-gradient(135deg, #00f5ff, #00bfff);
+    color: #0a0a0a;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+}
+
+.calendar-day {
+    background: rgba(31, 31, 31, 0.8);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.calendar-day:hover {
+    background: #00f5ff;
+    color: #0a0a0a;
+    transform: scale(1.05);
+}
+
+.calendar-day.today {
+    background: linear-gradient(135deg, #00f5ff, #00bfff);
+    color: #0a0a0a;
+    font-weight: 700;
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+}
+
+.calendar-day.has-event::after {
+    content: '•';
+    position: absolute;
+    bottom: 8px;
+    font-size: 20px;
+    color: #ff9d00;
+}
+
+.calendar-day.empty {
+    background: transparent;
+    color: transparent;
+    pointer-events: none;
+}
+
+.deadlines-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.add-deadline-btn {
+    background: linear-gradient(135deg, #00f5ff, #00bfff);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0a0a0a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.add-deadline-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 245, 255, 0.4);
+}
+
+.deadlines-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 20px;
+}
+
+.deadline-card {
+    background: rgba(31, 31, 31, 0.8);
+    border-radius: 20px;
+    padding: 20px;
+    transition: all 0.2s;
+    border-left: 4px solid #ff9d00;
+    position: relative;
+}
+
+.deadline-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 245, 255, 0.2);
+}
+
+.deadline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.deadline-info h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.subject-tag {
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: #00bfff;
+    display: inline-block;
+}
+
+.deadline-description {
+    font-size: 14px;
+    color: #cccccc;
+    margin: 12px 0;
+    line-height: 1.5;
+}
+
+.deadline-time {
+    text-align: right;
+}
+
+.time-left {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ff9d00;
+}
+
+.deadline-date {
+    font-size: 12px;
+    color: #aaaaaa;
+}
+
+.delete-deadline {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 59, 92, 0.2);
+    border: none;
+    color: #ff3b5c;
+    font-size: 20px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.delete-deadline:hover {
+    background: #ff3b5c;
+    color: white;
+}
+
+.edit-deadline-btn {
+    margin-top: 12px;
+    background: rgba(0, 245, 255, 0.2);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: #00f5ff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.edit-deadline-btn:hover {
+    background: rgba(0, 245, 255, 0.4);
+}
+
+.deadline-modal, .day-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.deadline-modal.active, .day-modal.active {
+    display: flex;
+}
+
+.deadline-modal-content, .day-modal-content {
+    background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+    border-radius: 32px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 1px solid rgba(0, 245, 255, 0.3);
+}
+
+.day-modal-content {
+    max-width: 600px;
+}
+
+.deadline-modal-content h3, .day-modal-content h3 {
+    font-size: 28px;
+    margin-bottom: 24px;
+    color: #00f5ff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #aaa;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #00f5ff;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.modal-buttons button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.save-btn {
+    background: linear-gradient(90deg, #00f5ff, #00bfff);
+    color: #0a0a0a;
+}
+
+.cancel-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.modal-close-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, #00f5ff, #00bfff);
+    border: none;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #0a0a0a;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 245, 255, 0.4);
+}
+
+.event-section {
+    margin-bottom: 24px;
+}
+
+.event-section h4 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #ff9d00;
+}
+
+.event-card {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-left: 3px solid #00f5ff;
+}
+
+.event-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.event-details {
+    font-size: 14px;
+    color: #aaa;
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        padding: 12px;
+    }
+
+    .main-layout {
+        flex-direction: column;
+    }
+
+    .side-nav {
+        width: 100%;
+        position: static;
+        display: flex;
+        gap: 12px;
+        padding: 12px;
+        overflow-x: auto;
+    }
+
+    .nav-btn {
+        flex: 1;
+        min-width: fit-content;
+        justify-content: center;
+    }
+
+    .nav-text {
+        display: none;
+    }
+
+    .nav-icon {
+        font-size: 28px;
+    }
+
+    .view-header h2 {
+        font-size: 24px;
+    }
+
+    .week-navigation {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .week-controls {
+        justify-content: center;
+    }
+
+    .week-tabs {
+        justify-content: center;
+    }
+
+    th, td {
+        padding: 12px;
+    }
+
+    .day-cell {
+        width: 80px;
+    }
+
+    .deadlines-list {
+        grid-template-columns: 1fr;
+    }
+
+    .calendar-grid {
+        gap: 8px;
+    }
+
+    .calendar-day {
+        font-size: 14px;
+    }
+
+    .greeting h1 {
+        font-size: 24px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f1f1f;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00f5ff;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00bfff;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#username-display {
+    font-size: 14px;
+    font-weight: 500;
+    color: #00f5ff;
+}
+
+.logout-btn {
+    background: rgba(255, 59, 92, 0.2);
+    border: none;
+    color: #ff3b5c;
+    font-size: 20px;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.logout-btn:hover {
+    background: #ff3b5c;
+    color: white;
+    transform: scale(1.05);
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #00f5ff;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+.schedule-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: #f8f9fa; /* Светлый фон */
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 15px;
+    width: fit-content; /* Ширина по контенту */
+}
+
+.schedule-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0; /* Убираем лишние отступы, так как фона нет */
+    background: transparent; /* Убираем фон */
+    border: none; /* Убираем рамку */
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6); /* Полупрозрачный белый, чтобы не отвлекал */
+    width: fit-content;
+    margin-left: auto; /* Прижмет блок к правому краю, если он в флекс-контейнере */
+}
+
+.status-icon {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    color: #4cd9ff; /* Голубоватый акцент под стать вашим кнопкам */
+}
+
+#update-status {
+    font-weight: 400; /* Делаем шрифт чуть легче, чтобы не выбивался */
+    letter-spacing: 0.3px;
+}
+
+/* Эффект при наведении, чтобы блок "оживал" */
+.schedule-status:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 600px) {
+    .schedule-status {
+        font-size: 0.75rem;
+        margin: 10px auto 0; /* На мобилках лучше центровать или оставить под заголовком */
+    }
+}
+
+.nav-logo {
+    height: 80px;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 8px;
+
+    /* Белая обводка (контур) */
+    filter: drop-shadow(1px 0 0 white)
+            drop-shadow(-1px 0 0 white)
+            drop-shadow(0 1px 0 white)
+            drop-shadow(0 -1px 0 white);
+}
+
+.logo-link {
+    text-decoration: none; /* Убираем подчеркивание текста */
+    color: inherit;        /* Текст внутри (StudyFlow) будет того же цвета, что и был */
+    display: inline-block; /* Чтобы ссылка облегала блок логотипа корректно */
+}
+
+.logo-link:hover {
+    opacity: 0.8;          /* Легкий эффект при наведении, чтобы юзер видел: это кнопка */
+    transition: 0.2s;
+}
+
+
+.schedule-status-container {
+    width: 100%;
+    padding: 0 20px; /* Отступы от краев экрана */
+    margin-top: 15px;
+}
+
+.sync-wrapper {
+    display: flex;
+    justify-content: space-between; /* РАСКИДЫВАЕТ ПО КРАЯМ */
+    align-items: center;           /* Выравнивает по центру высоты */
+    width: 100%;
+    max-width: 100%;               /* Чтобы растягивалось на всю доступную ширину */
+}
+
+.sync-action-btn {
+    background: #00f5ff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    color: #000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    min-width: 130px; /* Чтобы размер не прыгал при появлении цифр */
+    justify-content: center;
+}
+
+.sync-action-btn:hover:not(:disabled) {
+    background: #00dce6;
+    transform: translateY(-1px);
+}
+
+.sync-action-btn:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    color: #666;
+    cursor: not-allowed;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.update-info-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: right;
+    white-space: nowrap; /* Чтобы дата не переносилась на вторую строку */
+}
+
+.sync-icon {
+    font-size: 14px;
+}
+
+.loading .sync-icon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+    .sync-wrapper {
+        gap: 10px;
+    }
+    .update-info-text {
+        font-size: 11px;
+    }
+}
+
+
