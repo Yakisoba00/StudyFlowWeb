@@ -1,0 +1,60 @@
+
+
+ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS subject VARCHAR(255);
+ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS date DATE;
+ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS time VARCHAR(10);
+ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS tag VARCHAR(50);
+ALTER TABLE deadlines DROP COLUMN IF EXISTS due_date; -- если больше не нужен
+
+-- Таблица связки (если ещё не создана)
+CREATE TABLE IF NOT EXISTS user_deadlines (
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    deadline_id INTEGER REFERENCES deadlines(id) ON DELETE CASCADE,
+    completed BOOLEAN DEFAULT false,
+    PRIMARY KEY (user_id, deadline_id)
+);
+
+-- Добавляем колонки, которых нет (будут NULL для старых записей)
+ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS subject VARCHAR(255);
+ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS title VARCHAR(255);
+ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS date DATE;
+ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS time VARCHAR(10);
+ALTER TABLE deadlines ADD COLUMN IF NOT EXISTS tag VARCHAR(50);
+
+-- Если в таблице есть поле due_date, а мы теперь используем date+time, можно оставить оба или перенести данные.
+-- Опционально: перенести данные из due_date в date (если due_date существует и заполнен)
+-- UPDATE deadlines SET date = due_date::date WHERE due_date IS NOT NULL;
+
+CREATE TABLE IF NOT EXISTS user_deadlines (
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    deadline_id INTEGER REFERENCES deadlines(id) ON DELETE CASCADE,
+    completed BOOLEAN DEFAULT false,
+    PRIMARY KEY (user_id, deadline_id)
+);
+
+-- Удаляем старую таблицу deadlines (если есть) — осторожно, данные потеряются!
+DROP TABLE IF EXISTS deadlines CASCADE;
+
+-- Создаём таблицу deadlines с нужными полями
+CREATE TABLE deadlines (
+    id SERIAL PRIMARY KEY,
+    subject VARCHAR(255),
+    title VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+    time VARCHAR(10),
+    description TEXT,
+    tag VARCHAR(50),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Создаём таблицу связки пользователь-дедлайн
+CREATE TABLE IF NOT EXISTS user_deadlines (
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    deadline_id INTEGER REFERENCES deadlines(id) ON DELETE CASCADE,
+    completed BOOLEAN DEFAULT false,
+    PRIMARY KEY (user_id, deadline_id)
+);
+
+SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'deadlines';
+
+ALTER TABLE user_deadlines ADD COLUMN IF NOT EXISTS completed BOOLEAN DEFAULT false;
