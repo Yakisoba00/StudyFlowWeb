@@ -44,3 +44,15 @@ export function mapLessonType(typeId) {
     const types = { 1: '1', 2: 'Лекция', 3: '3', 4: 'Практика', 4096: 'Лекция' };
     return types[typeId] || 'Занятие';
 }
+
+export function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const match = String(dateStr).match(/^(\d{4}-\d{2}-\d{2})/);
+    if (match) return match[1];
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
